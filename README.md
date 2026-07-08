@@ -1,1 +1,1 @@
-# worldcup-predictionmarket
+# worldcup-prediction6market
