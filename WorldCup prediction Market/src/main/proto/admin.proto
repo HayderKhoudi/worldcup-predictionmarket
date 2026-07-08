@@ -1,0 +1,39 @@
+syntax = "proto3";
+option java_package = "de.tuberlin.proto";
+option java_outer_classname = "AdminProto";
+// this is what the adminClient can ask the server to do
+service AdminService{
+  // rpc: a function that can be called from a distance( remotly)
+  rpc CreateMarket(CreateMarketRequest) returns (CreateMarketResponse);
+  // The Admin wants to resolve a new betting market for a match.
+  rpc ResolveMarket(ResolveMarketRequest) returns (ResolveMarketResponse);
+  rpc DeleteMarket(DeleteMarketRequest) returns (DeleteMarketResponse);
+}
+message CreateMarketRequest { // java class with only fields
+  string home_team = 1; // ID numbers
+  string away_team = 2;
+}
+message CreateMarketResponse {
+  bool success = 1;
+  string message = 2;
+  int32 market_id = 3;
+}
+
+message ResolveMarketRequest {
+  int32 market_id = 1;
+  string result = 2;
+}
+
+message ResolveMarketResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message DeleteMarketRequest {
+  int32 market_id = 1;
+}
+
+message DeleteMarketResponse {
+  bool success = 1;
+  string message = 2;
+}

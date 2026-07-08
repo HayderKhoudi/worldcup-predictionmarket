@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option java_package = "de.tuberlin.proto";
+option java_outer_classname = "BettingProto";
+
+service BettingService {
+  rpc PlaceBet(PlaceBetRequest) returns (PlaceBetResponse);
+  rpc GetOdds(GetOddsRequest) returns (GetOddsResponse);
+  rpc GetMyBets(GetMyBetsRequest) returns (GetMyBetsResponse);
+}
+
+message PlaceBetRequest {
+  int32 market_id = 1;
+  string bettor_name = 2;
+  string prediction = 3;
+}
+
+message PlaceBetResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message GetOddsRequest {
+  int32 market_id = 1;
+}
+
+message GetOddsResponse {
+  double home_odds = 1;
+  double draw_odds = 2;
+  double away_odds = 3;
+}
+
+message GetMyBetsRequest {
+  string bettor_name = 1;
+}
+
+message GetMyBetsResponse {
+  repeated string bets = 1; // a better can have multiple of bets
+}

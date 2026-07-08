@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_package = "de.tuberlin.proto";
+option java_outer_classname = "SpectatorProto";
+
+service SpectatorService {
+  rpc WatchOdds(WatchOddsRequest) returns (stream OddsUpdate);
+  rpc GetLeaderboard(LeaderboardRequest) returns (LeaderboardResponse);
+}
+
+message WatchOddsRequest {
+  int32 market_id = 1;
+}
+
+message OddsUpdate { // the server keeps sending Updates everytime the odds changes
+  string home_team = 1;
+  string away_team = 2;
+  double home_odds = 3;
+  double draw_odds = 4;
+  double away_odds = 5;
+}
+
+message LeaderboardRequest { // the spectator doesn't need to send anything to the server
+}
+
+message LeaderboardResponse { // list of predictions.
+  repeated string entries = 1;
+}
